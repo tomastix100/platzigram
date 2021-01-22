@@ -32,4 +32,4 @@ def hi(request):
         'message':'Integers sorted successfully.'
     }
     
-    return HttpResponse(json.dumps(data), content_type='application/json')
+    return HttpResponse(json.dumps(data, indent=4), content_type='application/json')
