@@ -23,13 +23,29 @@ def hello_world(request):
     """
 
 
-def hi(request):
-    """Hi."""
+def sort_integers(request):
+    """Retuturns a JSON reponse with sorted intergers"""
     lista_ordenada = sorted([int(x) for x in request.GET['numbers'].split(',')])
     data = {
         'status':'ok',
         'numbers':lista_ordenada,
         'message':'Integers sorted successfully.'
     }
-    
-    return HttpResponse(json.dumps(data, indent=4), content_type='application/json')
+    # El metodo json.dumps({}) traduce un diccionario de python a Json, si
+    # queremos que tenga una indentacion lo que hace,os es agregar el paraemtro
+    # *indent*
+    return HttpResponse(
+        json.dumps(
+            data, 
+            indent=4
+        ), 
+        content_type='application/json'
+    )
+
+def say_hi(request, name, age):
+    """Retirn a greeting"""
+    if age < 12:
+        message = 'Sorry {}, you are not allowed here.'.format(name)
+    else:
+        message = 'Helo, {}! Welcome to Platzigram.'.format(name)
+    return HttpResponse(message)
