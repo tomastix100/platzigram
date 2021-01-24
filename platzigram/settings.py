@@ -27,21 +27,28 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
-# Application definition
-
-INSTALLED_APPS = [
-    # Django apps
+DJANGO_APPS = (
+	# Aca irian esas que estan desde el inicio del proyecto y vienen por defecto
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+)
 
-    # Local apps
+THIRD_PARTY_APPS = (
+	# Aca irian apps externas como Django Rest Framework, Celery, django debug toolbar, etc
+)
+
+LOCAL_APPS = (
+	# Aca irian las apps de nuestros proyectos que vamoss a instalar, cosas como posts, perfiles, nosé
     'posts',
-]
+)
+
+# Application definition
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
