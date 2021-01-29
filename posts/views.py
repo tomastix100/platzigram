@@ -38,4 +38,9 @@ posts = [
 
 def list_posts(request):
     """List existing posts."""
-    return render(request, 'feed.html',{'posts':posts})
+    """
+    1. lo primero que hace es buscar la carpeta templates de en la raiz de nuestro proyecto
+    2. Estando en la caprte templates buscara la carpeta posts
+    3. Dentro de posts buscaa el archivo html feed.html
+    """
+    return render(request, 'posts/feed.html',{'posts':posts})

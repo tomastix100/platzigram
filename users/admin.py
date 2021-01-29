@@ -67,6 +67,7 @@ class UserAdmin(BaseUserAdmin):
     """Add profile admin to base user admin."""
 
     inlines = (ProfileInline,)
+    # Aca van los campos que queremos que nos muestre
     list_display = (
         'username',
         'email',
