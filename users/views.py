@@ -12,6 +12,10 @@ from django.db.utils import IntegrityError
 from django.contrib.auth.models import User
 from users.models import Profile
 
+@login_required
+def update_profile(request):
+    """Update a user's profile view."""
+    return render(request, 'users/update_profile.html')
 
 def login_view(request):
     """Login view."""
@@ -40,6 +44,7 @@ def logout_view(request):
 def signup(request):
     """Sign up view."""
     if request.method == 'POST':
+        # Capturamos los parametros que llegan en el request
         username = request.POST['username']
         passwd = request.POST['passwd']
         passwd_confirmation = request.POST['passwd_confirmation']
@@ -48,6 +53,7 @@ def signup(request):
             return render(request, 'users/signup.html', {'error': 'Password confirmation does not match'})
 
         try:
+            # creamos el usuario, se coloca en una excepción ya que si el usuario ya existe lo que hace es saltar un error de Usuario existente
             user = User.objects.create_user(username=username, password=passwd)
         except IntegrityError:
             return render(request, 'users/signup.html', {'error': 'Username is already in user'})
