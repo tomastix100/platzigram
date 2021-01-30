@@ -1,7 +1,9 @@
 """Users views."""
 
 # Django
-from django.contrib.auth import authenticate, login
+# Django
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 
@@ -22,3 +24,10 @@ def login_view(request):
             return render(request, 'users/login.html', {'error': 'Invalid username and password'})
     # Cuando se llame a esta direccioó se retornara la vista login.html
     return render(request, 'users/login.html')
+
+
+@login_required
+def logout_view(request):
+    """Logout a user."""
+    logout(request)
+    return redirect('login')
