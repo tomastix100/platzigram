@@ -5,10 +5,8 @@
 {% endblock %}
 
 {% block container %}
-    <div class="invalid-feedback">
-        {% for error in form.title.errors %}{{ error }}{% endfor %}
-    </div>
-    <form action="{% url 'signup' %}" method="POST">
+
+    <form action="{% url 'users:signup' %}" method="POST">
         {% csrf_token %}
 
         {{ form.as_p }}
@@ -16,6 +14,7 @@
         <button class="btn btn-primary btn-block mt-5" type="submit">Register!</button>
 
     </form>
-    <p class="mt-4">I prefer to log in! <a href="{% url "login" %}">Login.</a></p>
+
+    <p class="mt-4">I prefer to log in! <a href="{% url "users:login" %}">Login.</a></p>
 
 {% endblock %}

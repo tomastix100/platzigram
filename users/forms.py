@@ -13,11 +13,11 @@ class SignupForm(forms.Form):
 
     username = forms.CharField(min_length=4, max_length=50)
 
-    passwd = forms.CharField(
+    password = forms.CharField(
         max_length=70,
         widget=forms.PasswordInput()
     )
-    passwd_confirmation = forms.CharField(
+    password_confirmation = forms.CharField(
         max_length=70,
         widget=forms.PasswordInput()
     )
@@ -44,22 +44,22 @@ class SignupForm(forms.Form):
             # Ya Django sube la excepción hasta el nivel del HTML
             raise forms.ValidationError('Username is already in use.')
         return username
-
+    
     def clean(self):
-        """Verify password confirmation match."""
+        """Verify password confirmation match"""
         # Como no quremos sobreescribir el metodo clean el cual manda  
         # a llamar otras cosas, entonces  vamos a traer los datos que
         # ya nos traeria clean si no lo hubieramos sobre escrito y esto
         # se hace con el siguiente codigo
         data = super().clean() # Esta es una forma de llamar el metodo antes de ser sobreescrito
-        password = data['passwd']
-        password_confirmation = data['passwd_confirmation']
+        password = data['password']
+        password_confirmation = data['password_confirmation']
 
         if password != password_confirmation:
             raise forms.ValidationError('Passwords do not match.')
 
         return data
-
+    
     def save(self):
         """Create user and profile."""
         data = self.cleaned_data
