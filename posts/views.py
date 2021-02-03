@@ -1,6 +1,7 @@
 """Posts views."""
 
 # Django
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -39,6 +40,24 @@ class PostDetailView(LoginRequiredMixin, DetailView):
     template_name = 'posts/detail.html'
     queryset = Post.objects.all()
     context_object_name = 'post'
+
+class CreatePostView(LoginRequiredMixin, CreateView):
+    """Create a new post."""
+
+    template_name = 'posts/new.hTml'
+    form_class = PostForm
+    # Redireccion cuando el la creacion del posts hay sido exitosa
+    success_url = reverse_lazy('posts:feed')
+    # Agregamos mas datos al contexto
+    def get_context_data(self, **kwargs):
+        """Add user and profile to context."""
+        # Rescatamos los datos que ya trae por defecto
+        context = super().get_context_data(**kwargs)
+        # Capturamos el usuario
+        context['user'] = self.request.user
+        # Capturamos el perfil
+        context['profile'] = self.request.user.profile
+        return context
 
 @login_required
 def create_post(request):
