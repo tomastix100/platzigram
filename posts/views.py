@@ -2,8 +2,6 @@
 
 # Django
 from django.urls import reverse_lazy
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, DetailView, ListView
 
@@ -59,9 +57,10 @@ class CreatePostView(LoginRequiredMixin, CreateView):
         context['profile'] = self.request.user.profile
         return context
 
+"""
 @login_required
 def create_post(request):
-    """Create new post view."""
+    # Create new post view.
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
@@ -80,3 +79,4 @@ def create_post(request):
             'profile': request.user.profile
         }
     )
+"""

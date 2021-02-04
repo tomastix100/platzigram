@@ -14,14 +14,8 @@ from users import views
     name='detail'
 )"""
 
-urlpatterns = [
 
-    # Posts
-    path(
-        route='profile/<str:username>/',
-        view=views.UserDetailView.as_view(),
-        name='detail'
-    ),
+urlpatterns = [
 
     # Management
     path(
@@ -36,13 +30,20 @@ urlpatterns = [
     ),
     path(
         route='signup/',
-        view=views.signup,
+        view=views.SignupView.as_view(),
         name='signup'
     ),
     path(
         route='me/profile/',
-        view=views.update_profile,
+        view=views.UpdateProfileView.as_view(),
         name='update'
+    ),
+
+    # Posts
+    path(
+        route='profile/<str:username>/',
+        view=views.UserDetailView.as_view(),
+        name='detail'
     )
 
 ]
