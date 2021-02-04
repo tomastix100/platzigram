@@ -20,12 +20,12 @@ urlpatterns = [
     # Management
     path(
         route='login/',
-        view=views.login_view,
+        view=views.LoginView.as_view(),
         name='login'
     ),
     path(
         route='logout/',
-        view=views.logout_view,
+        view=views.LogoutView.as_view(),
         name='logout'
     ),
     path(
@@ -41,7 +41,7 @@ urlpatterns = [
 
     # Posts
     path(
-        route='profile/<str:username>/',
+        route='<str:username>/',
         view=views.UserDetailView.as_view(),
         name='detail'
     )
